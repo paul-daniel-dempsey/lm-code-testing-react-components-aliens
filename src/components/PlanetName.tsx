@@ -1,15 +1,15 @@
-interface SpeciesNameProps { 
+export interface PlanetNameProps { 
 	planetName: string;
-	onChangePlanetName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChangePlanetName: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
 }
 
-const PlanetName : React.FC<SpeciesNameProps> = ({planetName,onChangePlanetName}) =>  {
+const PlanetName : React.FC<PlanetNameProps> = ({planetName,onChangePlanetName}) =>  {
 
     return(
     <>  
         <div>
             <label htmlFor='planetName'>Planet Name: </label>
-            <input id='planetName' type='text' value={planetName} onChange={onChangePlanetName} />   
+            <input id='planetName' data-testid='planetName' type='text' value={planetName} onChange={onChangePlanetName} />   
         </div>
     </>)
 }

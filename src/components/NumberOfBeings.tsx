@@ -1,6 +1,7 @@
-interface NumberOfBeingsProp {
+export interface NumberOfBeingsProp {
     numberOfBeings : string;
-    onChangeNumberOfBeings: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+    onChangeNumberOfBeings: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void; 
+    //onChangeNumberOfBeings1: (count: string) => void;
 }
 
 const NumberOfBeings : React.FC<NumberOfBeingsProp> = ({numberOfBeings,onChangeNumberOfBeings}) =>  {
@@ -8,8 +9,12 @@ const NumberOfBeings : React.FC<NumberOfBeingsProp> = ({numberOfBeings,onChangeN
     return(
     <>  
         <div>
-        <label htmlFor='speciesName'>Number of beings: </label>
-        <input id='numberOfBeings' type='text' value={numberOfBeings} onChange={onChangeNumberOfBeings} />
+        <label htmlFor='numberOfBeings'>Number of beings: </label>
+        <input  id="numberOfBeings" 
+                data-testid="numberOfBeings" 
+                type='text' 
+                value={numberOfBeings} 
+                onChange={onChangeNumberOfBeings} />
         </div>
     </>)
 }

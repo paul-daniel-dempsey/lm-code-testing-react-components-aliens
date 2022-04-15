@@ -1,6 +1,6 @@
-interface SpeciesNameProps { 
+export interface SpeciesNameProps { 
 	speciesName: string;
-	onChangeSpeciesName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChangeSpeciesName: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
 }
 
 const SpeciesName : React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpeciesName }) => {
@@ -10,7 +10,7 @@ const SpeciesName : React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpecies
     <>
         <div>
             <label htmlFor='speciesName'>Species Name: </label>
-            <input id='speciesName' type='text' value={speciesName} onChange={onChangeSpeciesName} />
+            <input id='speciesName' data-testid='speciesName' type='text' value={speciesName} onChange={onChangeSpeciesName} />
         </div>
     </>)
 }

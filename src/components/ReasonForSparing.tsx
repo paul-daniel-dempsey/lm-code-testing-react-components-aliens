@@ -1,6 +1,6 @@
-interface ReasonForSparingProps { 
+export interface ReasonForSparingProps { 
 	reasonForSparing: string;
-	onReasonForSparing: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	onReasonForSparing: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
 }
 
 const ReasonForSparing : React.FC<ReasonForSparingProps> = ({reasonForSparing,onReasonForSparing}) =>  {
@@ -9,7 +9,7 @@ const ReasonForSparing : React.FC<ReasonForSparingProps> = ({reasonForSparing,on
     <>  
         <div>
             <label>Reason for sparing: </label>
-            <textarea id="reasonForSparing" value={reasonForSparing} onChange={onReasonForSparing}>
+            <textarea id="reasonForSparing" data-testid='reasonForSparing' value={reasonForSparing} onChange={onReasonForSparing}>
             </textarea>
         </div> 
     </>)
