@@ -18,7 +18,7 @@ const PlanetName : React.FC<PlanetNameProps> = ({planetName,onChangePlanetName})
             return undefined;
         }
         else {
-            return 'Error : Must be between 2 and 49 characters. Numbers are allowed, but no special characters.';
+            return 'ERROR - Must be between 2 and 49 characters. Numbers are allowed, but no special characters';
         }
     }
 

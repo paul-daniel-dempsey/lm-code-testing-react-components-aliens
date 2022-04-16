@@ -44,5 +44,31 @@ describe('WhatIsTwoPlusTwo', () => {
 
         // Input field called with correct parameters?
         expect(mockOnChangeTwoPlusTwo.mock.calls[0][0].target.value).toBe(testField);
+    });
+   
+    test(`Given VALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = '4';
+        const whatIsTwoPlusTwo : WhatIsTwoPlusTwoProps = {
+            whatIsTwoPlusTwo : testField,
+            onChangeWhatIsTwoPlusTwo : () => {},
+        }
+        render(<WhatIsTwoPlusTwo {...whatIsTwoPlusTwo}/>);
+		expect(await screen.findByText('ERROR - "4" must be selected'))
+            .toBeUndefined();  // WHY does this not be picked up like example?
+    });
+
+    test(`Given INVALID length props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = 'Not 4';
+        const whatIsTwoPlusTwo : WhatIsTwoPlusTwoProps = {
+            whatIsTwoPlusTwo : testField,
+            onChangeWhatIsTwoPlusTwo : () => {},
+        }
+        render(<WhatIsTwoPlusTwo {...whatIsTwoPlusTwo}/>);
+		expect(await screen.findByText('ERROR - "4" must be selected'))
+            .toBeInTheDocument();
     });    
 });

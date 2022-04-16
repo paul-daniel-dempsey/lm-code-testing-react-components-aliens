@@ -48,5 +48,58 @@ describe('PlanetName', () => {
         // Input field called with correct parameters?
         expect(mockOnChangePlanetName.mock.calls[testField.length-1][0].target.value).toBe('jupiter'); // testField
         //expect(mockOnChangePlanetName.mock.calls[0][0].target.value).toBe(testField); // testField
+    });
+   
+    test(`Given VALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = 'jupiter1';
+        const planetName : PlanetNameProps = {
+            planetName : testField,
+            onChangePlanetName : () => {},
+        }
+        render(<PlanetName {...planetName}/>);
+
+		expect(await screen.findByText('ERROR - Must be between 2 and 49 characters. Numbers are allowed, but no special characters'))
+            .toBeUndefined(); // WHY does this not be picked up like example?
+    });
+
+    test(`Given INVALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = 'a';
+        const planetName : PlanetNameProps = {
+            planetName : testField,
+            onChangePlanetName : () => {},
+        }
+        render(<PlanetName {...planetName}/>); // WHY doesnt render fire a validation error!!!
+		expect(await screen.findByText('ERROR - Must be between 2 and 49 characters. Numbers are allowed, but no special characters'))
+            .toBeInTheDocument();
+    });
+
+    it(`Given INVALID £ props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = '£';
+        const planetName : PlanetNameProps = {
+            planetName : testField,
+            onChangePlanetName : () => {},
+        }
+        render(<PlanetName {...planetName}/>); // WHY doesnt render fire a validation error!!!
+		expect(screen.getByText('ERROR - Must be between 2 and 49 characters. Numbers are allowed, but no special characters')
+    	).toBeInTheDocument();
+    });
+
+    it(`Given INVALID length props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = '1';
+        const planetName : PlanetNameProps = {
+            planetName : testField,
+            onChangePlanetName : () => {},
+        }
+        render(<PlanetName {...planetName}/>); // WHY doesnt render fire a validation error!!!
+		expect(screen.getByText('ERROR - Must be between 2 and 49 characters. Numbers are allowed, but no special characters')
+    	).toBeInTheDocument();
     });    
 });

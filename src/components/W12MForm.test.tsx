@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import W12MForm from './W12MForm';
 
@@ -26,6 +26,20 @@ describe('W12Form', () => {
 
         // Input field onChange called?
         expect(mockOnChangeW12MForm.mock.calls.length).toBe(0);
-    });    
+    });
+    
+    test('Does the submit button call its handler function?', () => {
+        
+        const mockOnChangeW12MForm = jest.fn();
+        render(<W12MForm />);
+        const buttonSubmit = screen.getAllByRole('button').find(a => a.textContent === 'Submit');
+        expect(buttonSubmit).toBeInTheDocument();
+		if (buttonSubmit){
+            userEvent.click(buttonSubmit); // WHY doesnt this click!!!!
+        }
+
+        // Input field onChange called?
+        expect(mockOnChangeW12MForm.mock.calls.length).toBe(0);
+    });   
 });
 

@@ -18,7 +18,8 @@ const SpeciesName : React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpecies
             return undefined;
         }
         else {
-            return 'Error : Must be between 3 and 23 characters. No numbers or special characters allowed!';
+            return 'ERROR - Species Name must be less than 23 characters';
+
         }
     }
 

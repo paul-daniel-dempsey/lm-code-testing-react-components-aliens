@@ -19,7 +19,7 @@ const NumberOfBeings : React.FC<NumberOfBeingsProp> = ({numberOfBeings,onChangeN
             return undefined;
         }
         else {
-            return 'Error : Numbers ONLY. Must be at least 1,000,000,000.';
+            return 'ERROR - Numbers ONLY. Must be at least 1,000,000,000';
         }
     }
 

@@ -1,12 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ChangeEvent } from 'react';
-import NumberOfBeings from './NumberOfBeings';
-
-interface NumberOfBeingsProp {
-    numberOfBeings : string;
-    onChangeNumberOfBeings: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void; 
-}
+import NumberOfBeings, { NumberOfBeingsProp } from './NumberOfBeings';
 
 describe('NumberOfBeings', () => {
     test('render form element NumberOfBeings', () => {
@@ -52,6 +47,59 @@ describe('NumberOfBeings', () => {
 
         // Input field called with correct parameters?
         expect(mockOnChangeNumberOfBeings.mock.calls[testField.length-1][0].target.value).toBe('0'); // testField
-    });    
+    });
+    
+    test(`Given VALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = '1000000000000';
+        const numberOfBeings : NumberOfBeingsProp = {
+            numberOfBeings : testField,
+            onChangeNumberOfBeings : () => {},
+        }
+        render(<NumberOfBeings {...numberOfBeings}/>);
+
+		expect(await screen.findByText('ERROR - Numbers ONLY. Must be at least 1,000,000,000'))
+            .toBeUndefined(); // WHY does this not be picked up like example?
+    });
+
+    test(`Given INVALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = 'A';
+        const numberOfBeings : NumberOfBeingsProp = {
+            numberOfBeings : testField,
+            onChangeNumberOfBeings : () => {},
+        }
+        render(<NumberOfBeings {...numberOfBeings}/>); // WHY doesnt render fire a validation error!!!
+		expect(await screen.findByText('ERROR - Numbers ONLY. Must be at least 1,000,000,000'))
+            .toBeInTheDocument();
+    });
+
+    it(`Given INVALID £ props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = '£';
+        const numberOfBeings : NumberOfBeingsProp = {
+            numberOfBeings : testField,
+            onChangeNumberOfBeings : () => {},
+        }
+        render(<NumberOfBeings {...numberOfBeings}/>); // WHY doesnt render fire a validation error!!!
+		expect(screen.getByText('ERROR - Numbers ONLY. Must be at least 1,000,000,000')
+    	).toBeInTheDocument();
+    });
+
+    it(`Given INVALID length props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = '1';
+        const numberOfBeings : NumberOfBeingsProp = {
+            numberOfBeings : testField,
+            onChangeNumberOfBeings : () => {},
+        }
+        render(<NumberOfBeings {...numberOfBeings}/>); // WHY doesnt render fire a validation error!!!
+		expect(screen.getByText('ERROR - Numbers ONLY. Must be at least 1,000,000,000')
+    	).toBeInTheDocument();
+    });
 });
 

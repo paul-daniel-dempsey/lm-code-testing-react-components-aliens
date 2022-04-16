@@ -39,7 +39,7 @@ describe('SpeciesName', () => {
 
         if (inputfield){
             userEvent.type(inputfield,testField); // WHY doesnt this set value!!!!
-            //fireEvent.change(inputfield,{target: { value : testField}}) // WHY doesnt this set value!!!!
+            //fireEvent.change(inputfield,{target: { value : testField}}) // WHY doesnt this set value!!!
         }
 
         // Input field onChange called?
@@ -51,4 +51,56 @@ describe('SpeciesName', () => {
         //expect(mockOnReasonForSparing.mock.calls[0][0].target.value).toBe(testField); // testField
     });   
 
+    test(`Given VALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = 'human';
+        const speciesNames : SpeciesNameProps = {
+            speciesName : testField,
+            onChangeSpeciesName : () => {},
+        }
+        render(<SpeciesName {...speciesNames}/>);
+
+		expect(await screen.findByText('ERROR - Species Name must be less than 23 characters'))
+            .toBeUndefined(); // WHY does this not be picked up like example?
+    });
+
+    test(`Given INVALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, async () => {
+        const testField = 'AAA1';
+        const speciesNames : SpeciesNameProps = {
+            speciesName : testField,
+            onChangeSpeciesName : () => {},
+        }
+        render(<SpeciesName {...speciesNames}/>); // WHY doesnt render fire a validation error!!!
+		expect(await screen.findByText('ERROR - Species Name must be less than 23 characters'))
+            .toBeInTheDocument();
+    });
+
+    it(`Given INVALID £ props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = 'AAA£';
+        const speciesNames : SpeciesNameProps = {
+            speciesName : testField,
+            onChangeSpeciesName : () => {},
+        }
+        render(<SpeciesName {...speciesNames}/>); // WHY doesnt render fire a validation error!!!
+		expect(screen.getByText('ERROR - Species Name must be less than 23 characters')
+    	).toBeInTheDocument();
+    });
+
+    it(`Given INVALID length props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = 'AA';
+        const speciesNames : SpeciesNameProps = {
+            speciesName : testField,
+            onChangeSpeciesName : () => {},
+        }
+        render(<SpeciesName {...speciesNames}/>); // WHY doesnt render fire a validation error!!!
+		expect(screen.getByText('ERROR - Species Name must be less than 23 characters')
+    	).toBeInTheDocument();
+    });
 });

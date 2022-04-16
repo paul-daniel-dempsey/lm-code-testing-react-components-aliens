@@ -15,7 +15,7 @@ const WhatIsTwoPlusTwo : React.FC<WhatIsTwoPlusTwoProps> = ({whatIsTwoPlusTwo, o
             return undefined;
         }
         else {
-            return 'Error : "4" must be selected.';
+            return 'ERROR - "4" must be selected';
         }
     }
 

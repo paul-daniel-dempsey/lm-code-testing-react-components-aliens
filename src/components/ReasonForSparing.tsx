@@ -16,7 +16,7 @@ const ReasonForSparing : React.FC<ReasonForSparingProps> = ({reasonForSparing,on
             return undefined;
         }
         else {
-            return 'Error : Must be between 17 and 153 characters.';
+            return 'ERROR - Must be between 17 and 153 characters';
         }
     }
     return(
