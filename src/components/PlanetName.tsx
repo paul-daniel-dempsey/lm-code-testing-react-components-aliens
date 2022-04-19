@@ -14,7 +14,7 @@ const PlanetName : React.FC<PlanetNameProps> = ({planetName,onChangePlanetName})
 
         const origLength = value.length;
         const noSpecialChars = value.replace(/[^a-zA-Z0-9]/g, "")
-        if ((noSpecialChars.length === origLength) && (origLength >= 2) && (origLength <=49)) {
+        if ((noSpecialChars.length === origLength) && (origLength >= 3) && (origLength <=50)) {
             return undefined;
         }
         else {
