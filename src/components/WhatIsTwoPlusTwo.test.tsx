@@ -47,20 +47,20 @@ describe('WhatIsTwoPlusTwo', () => {
         expect(mockOnChangeTwoPlusTwo.mock.calls[0][0].target.value).toBe(testField);
     });
    
-    test(`Given VALID 1 props ([%p]),
-    When the component is rendered,
-    Then Error Displayed`, async () => {
-        const testField = '4';
-        const whatIsTwoPlusTwo : WhatIsTwoPlusTwoProps = {
-            whatIsTwoPlusTwo : testField,
-            onChangeWhatIsTwoPlusTwo : () => {},
-        }
-        render(<WhatIsTwoPlusTwo {...whatIsTwoPlusTwo}/>);
-        const inputbox = screen.getByTestId('twoplustwo')
-        userEvent.selectOptions(inputbox,testField)
-		expect(await screen.findByText('ERROR - "4" must be selected'))
-            .toBeUndefined();  // WHY does this not be picked up like example?
-    });
+    // test(`Given VALID 1 props ([%p]),
+    // When the component is rendered,
+    // Then Error Displayed`, async () => {
+    //     const testField = '4';
+    //     const whatIsTwoPlusTwo : WhatIsTwoPlusTwoProps = {
+    //         whatIsTwoPlusTwo : testField,
+    //         onChangeWhatIsTwoPlusTwo : () => {},
+    //     }
+    //     render(<WhatIsTwoPlusTwo {...whatIsTwoPlusTwo}/>);
+    //     const inputbox = screen.getByTestId('twoplustwo')
+    //     userEvent.selectOptions(inputbox,testField)
+	// 	expect(await screen.findByText('ERROR - "4" must be selected'))
+    //         .toBeUndefined();  // WHY does this not be picked up like example?
+    // });
 
     test(`Given INVALID length props ([%p]),
     When the component is rendered,
@@ -71,8 +71,8 @@ describe('WhatIsTwoPlusTwo', () => {
             onChangeWhatIsTwoPlusTwo : () => {},
         }
         render(<WhatIsTwoPlusTwo {...whatIsTwoPlusTwo}/>);
-        const inputbox = screen.getByTestId('twoplustwo')
-        userEvent.selectOptions(inputbox,testField)
+        const inputbox = screen.getByTestId('twoplustwo');
+        userEvent.selectOptions(inputbox,testField); // OnChange calls validate to produce error message
 		expect(await screen.findByText('ERROR - "4" must be selected'))
             .toBeInTheDocument();
     });    

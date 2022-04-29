@@ -22,7 +22,8 @@ const WhatIsTwoPlusTwo : React.FC<WhatIsTwoPlusTwoProps> = ({whatIsTwoPlusTwo, o
     return(
     <>  
         <label>What Is 2+2? </label>
-        <select name="twoplustwo" 
+        <select className="twoplustwo" 
+                name="twoplustwo" 
                 data-testid='twoplustwo' 
                 onChange={(e) => {
                     const errorMessage = validate(e.target.value);
@@ -30,6 +31,7 @@ const WhatIsTwoPlusTwo : React.FC<WhatIsTwoPlusTwoProps> = ({whatIsTwoPlusTwo, o
                     onChangeWhatIsTwoPlusTwo(e);
                 }}>
             Species Name
+            <option value="" disabled>Select</option>
             <option value="4">4</option>
             <option value="Not 4">Not 4</option>    
         </select>

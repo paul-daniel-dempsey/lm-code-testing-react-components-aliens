@@ -8,11 +8,11 @@ import ReasonForSparing from './ReasonForSparing';
 
 const W12MForm = () => {
 
-    const [speciesName, setSpeciesName] = useState<string>('humans');
-    const [planetName,setPlanetName] = useState<string>('earth');
-	const [numberOfBeings, setNumberOfBeings] = useState<string>('1');
-	const [twoPlusTwo,setTwoPlusTwo] = useState<string>('4');
-	const [reasonSpare,setReasonSpare] = useState<string>('4');
+    const [speciesName, setSpeciesName] = useState<string>('');
+    const [planetName,setPlanetName] = useState<string>('');
+	const [numberOfBeings, setNumberOfBeings] = useState<string>('');
+	const [twoPlusTwo,setTwoPlusTwo] = useState<string>('');
+	const [reasonSpare,setReasonSpare] = useState<string>('');
 
 	function submitW12Form() {
 		console.log(speciesName);
@@ -25,14 +25,12 @@ const W12MForm = () => {
 	return (
 		<section className='w12MForm'>
 			<W12MHeader />
-			{<>
 			<SpeciesName speciesName={speciesName} onChangeSpeciesName={(e: any) => setSpeciesName(e.target.value)} />
 			<PlanetName planetName={planetName} onChangePlanetName={(e: any) => setPlanetName(e.target.value)} />
 			<NumberOfBeings numberOfBeings={numberOfBeings} onChangeNumberOfBeings={(e: any) => setNumberOfBeings(e.target.value)} />
 			<WhatIsTwoPlusTwo whatIsTwoPlusTwo={twoPlusTwo} onChangeWhatIsTwoPlusTwo={(e: any) => setTwoPlusTwo(e.target.value)} />
 			<ReasonForSparing reasonForSparing={reasonSpare} onReasonForSparing={(e: any) => setReasonSpare(e.target.value)} />
 			<button onClick={submitW12Form}>Submit</button>
-			</>}
 		</section>
 	);
 };

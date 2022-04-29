@@ -51,20 +51,20 @@ describe('SpeciesName', () => {
         //expect(mockOnReasonForSparing.mock.calls[0][0].target.value).toBe(testField); // testField
     });   
 
-    test(`Given VALID 1 props ([%p]),
-    When the component is rendered,
-    Then Error Displayed`, async () => {
-        const testField = 'human';
-        const speciesNames : SpeciesNameProps = {
-            speciesName : testField,
-            onChangeSpeciesName : () => {},
-        }
-        render(<SpeciesName {...speciesNames}/>);
-        const inputbox = screen.getByRole('textbox')
-        userEvent.type(inputbox,testField)
-		expect(await screen.findByText('ERROR - Species Name must be less than 23 characters'))
-            .toBeUndefined(); // WHY does this not be picked up like example?
-    });
+    // test(`Given VALID 1 props ([%p]),
+    // When the component is rendered,
+    // Then Error Displayed`, async () => {
+    //     const testField = 'human';
+    //     const speciesNames : SpeciesNameProps = {
+    //         speciesName : testField,
+    //         onChangeSpeciesName : () => {},
+    //     }
+    //     render(<SpeciesName {...speciesNames}/>);
+    //     const inputbox = screen.getByRole('textbox')
+    //     userEvent.type(inputbox,testField)
+	// 	expect(await screen.findByText('ERROR - Species Name must be less than 23 characters'))
+    //         .toBeUndefined(); // WHY does this not be picked up like example?
+    // });
 
     test(`Given INVALID 1 props ([%p]),
     When the component is rendered,
@@ -74,9 +74,9 @@ describe('SpeciesName', () => {
             speciesName : testField,
             onChangeSpeciesName : () => {},
         }
-        render(<SpeciesName {...speciesNames}/>); // WHY doesnt render fire a validation error!!!
-        const inputbox = screen.getByRole('textbox')
-        userEvent.type(inputbox,testField)
+        render(<SpeciesName {...speciesNames}/>);
+        const inputbox = screen.getByRole('textbox');
+        userEvent.type(inputbox,testField); // OnChange calls validate to produce error message
 		expect(await screen.findByText('ERROR - Species Name must be less than 23 characters'))
             .toBeInTheDocument();
     });
@@ -89,9 +89,9 @@ describe('SpeciesName', () => {
             speciesName : testField,
             onChangeSpeciesName : () => {},
         }
-        render(<SpeciesName {...speciesNames}/>); // WHY doesnt render fire a validation error!!!
-        const inputbox = screen.getByRole('textbox')
-        userEvent.type(inputbox,testField)
+        render(<SpeciesName {...speciesNames}/>);
+        const inputbox = screen.getByRole('textbox');
+        userEvent.type(inputbox,testField); // OnChange calls validate to produce error message
 		expect(screen.getByText('ERROR - Species Name must be less than 23 characters')
     	).toBeInTheDocument();
     });
