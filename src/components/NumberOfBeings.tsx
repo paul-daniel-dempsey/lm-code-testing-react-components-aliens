@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
+import { UpdateSubmitButtonContext } from "./W12MForm";
 
 export interface NumberOfBeingsProp {
     numberOfBeings : string;
@@ -8,6 +9,9 @@ export interface NumberOfBeingsProp {
 }
 
 const NumberOfBeings : React.FC<NumberOfBeingsProp> = ({numberOfBeings,onChangeNumberOfBeings}) =>  {
+    
+    // Consume 
+    const setSubmitButton = useContext(UpdateSubmitButtonContext);
 
     const [ errorMessage, setErrorMessage ] = useState<string | undefined>();
 
@@ -33,6 +37,8 @@ const NumberOfBeings : React.FC<NumberOfBeingsProp> = ({numberOfBeings,onChangeN
                 value={numberOfBeings} 
                     onChange={(e) => {
                         const errorMessage = validate(e.target.value);
+                        if (setSubmitButton != null){
+                            setSubmitButton(((errorMessage === undefined) ? false : true));}
                         setErrorMessage(errorMessage);
                         onChangeNumberOfBeings(e);
                     }} />

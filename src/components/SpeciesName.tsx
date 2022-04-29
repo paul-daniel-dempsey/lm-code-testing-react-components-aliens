@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
+import { UpdateSubmitButtonContext } from "./W12MForm";
 
 export interface SpeciesNameProps { 
 	speciesName: string;
@@ -7,7 +8,10 @@ export interface SpeciesNameProps {
 }
 
 const SpeciesName : React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpeciesName }) => {
-
+    
+    // Consume 
+    const setSubmitButton = useContext(UpdateSubmitButtonContext);
+    
     const [ errorMessage, setErrorMessage ] = useState<string | undefined>();
 
     const validate : (value : string) => string | undefined = (value) => {
@@ -31,6 +35,8 @@ const SpeciesName : React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpecies
                     value={speciesName} 
                     onChange={(e) => {
                         const errorMessage = validate(e.target.value);
+                        if (setSubmitButton != null){
+                            setSubmitButton(((errorMessage === undefined) ? false : true));}
                         setErrorMessage(errorMessage);
                         onChangeSpeciesName(e);
                     }} />

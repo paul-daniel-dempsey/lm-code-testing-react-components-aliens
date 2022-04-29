@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
+import { UpdateSubmitButtonContext } from "./W12MForm";
 
 export interface ReasonForSparingProps { 
 	reasonForSparing: string;
@@ -7,7 +8,10 @@ export interface ReasonForSparingProps {
 }
 
 const ReasonForSparing : React.FC<ReasonForSparingProps> = ({reasonForSparing,onReasonForSparing}) =>  {
-
+    
+    // Consume 
+    const setSubmitButton = useContext(UpdateSubmitButtonContext);
+    
     const [ errorMessage, setErrorMessage ] = useState<string | undefined>();
 
     const validate : (value : string) => string | undefined = (value) => {
@@ -28,6 +32,8 @@ const ReasonForSparing : React.FC<ReasonForSparingProps> = ({reasonForSparing,on
                         value={reasonForSparing} 
                         onChange={(e) => {
                             const errorMessage = validate(e.target.value);
+                            if (setSubmitButton != null){
+                                setSubmitButton(((errorMessage === undefined) ? false : true));}
                             setErrorMessage(errorMessage);
                             onReasonForSparing(e);
                     }} />

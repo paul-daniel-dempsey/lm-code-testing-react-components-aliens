@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ErrorMessage from "./ErrorMessage";
+import { UpdateSubmitButtonContext } from "./W12MForm";
 
 export interface PlanetNameProps { 
 	planetName: string;
@@ -7,7 +8,10 @@ export interface PlanetNameProps {
 }
 
 const PlanetName : React.FC<PlanetNameProps> = ({planetName,onChangePlanetName}) =>  {
-
+    
+    // Consume 
+    const setSubmitButton = useContext(UpdateSubmitButtonContext);
+    
     const [ errorMessage, setErrorMessage ] = useState<string | undefined>();
 
     const validate : (value : string) => string | undefined = (value) => {
@@ -32,6 +36,8 @@ const PlanetName : React.FC<PlanetNameProps> = ({planetName,onChangePlanetName})
                     value={planetName} 
                     onChange={(e) => {
                         const errorMessage = validate(e.target.value);
+                        if (setSubmitButton != null){
+                            setSubmitButton(((errorMessage === undefined) ? false : true));}
                         setErrorMessage(errorMessage);
                         onChangePlanetName(e);
                     }} />
