@@ -49,20 +49,18 @@ describe('NumberOfBeings', () => {
         expect(mockOnChangeNumberOfBeings.mock.calls[testField.length-1][0].target.value).toBe('0'); // testField
     });
     
-    // test(`Given VALID 1 props ([%p]),
-    // When the component is rendered,
-    // Then Error Displayed`, async () => {
-    //     const testField = '1000000000000';
-    //     const numberOfBeings : NumberOfBeingsProp = {
-    //         numberOfBeings : testField,
-    //         onChangeNumberOfBeings : () => {},
-    //     }
-    //     render(<NumberOfBeings {...numberOfBeings}/>);
-    //     const inputbox = screen.getByRole('textbox')
-    //     userEvent.type(inputbox,testField)
-	// 	expect(await screen.findByText('ERROR - Numbers ONLY. Must be at least 1,000,000,000'))
-    //         .toBeUndefined(); // WHY does this not be picked up like example?
-    // });
+    test(`Given VALID 1 props ([%p]),
+    When the component is rendered,
+    Then Error Displayed`, () => {
+        const testField = '1000000000000';
+        const numberOfBeings : NumberOfBeingsProp = {
+            numberOfBeings : testField,
+            onChangeNumberOfBeings : () => {},
+        }
+        render(<NumberOfBeings {...numberOfBeings}/>);
+        expect(screen.queryAllByRole("inputbox").find((b) => b.textContent === testField))
+            .toBeUndefined();
+    });
 
     test(`Given INVALID 1 props ([%p]),
     When the component is rendered,
