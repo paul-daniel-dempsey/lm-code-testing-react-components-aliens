@@ -16,28 +16,45 @@ export const submitButtonContext = React.createContext<boolean>(true);
 export const UpdateSubmitButtonContext  = React.createContext<null | React.Dispatch<React.SetStateAction<boolean>>>(null);
 
 
-const W12MForm = () => {
+export const initial_WM12M : IW12M = {
+	speciesNameW12M : '',
+	planetNameW12M : '',
+    numberOfBeingsW12M : '',
+	twoPlusTwoW12M : '',
+	reasonSpareW12M : '',	
+}
+
+export interface IW12M {
+	speciesNameW12M : string,
+	planetNameW12M : string,
+    numberOfBeingsW12M : string,
+	twoPlusTwoW12M : string,
+	reasonSpareW12M : string,
+}
+
+export interface W12MProps {
+	w12m : IW12M,
+	onChangeW12M: (w12mObj : IW12M) => void;
+}
+
+const W12MForm : React.FC<W12MProps> = ({ w12m , onChangeW12M }) => {
 
     const [submitButton, setSubmitButton] = useState<boolean>(true);
 
-    const [speciesName, setSpeciesName] = useState<string>('');
-    const [planetName,setPlanetName] = useState<string>('');
-	const [numberOfBeings, setNumberOfBeings] = useState<string>('');
-	const [twoPlusTwo,setTwoPlusTwo] = useState<string>('');
-	const [reasonSpare,setReasonSpare] = useState<string>('');
+    const [speciesName, setSpeciesName] = useState<string>(w12m.speciesNameW12M);
+    const [planetName,setPlanetName] = useState<string>(w12m.planetNameW12M);
+	const [numberOfBeings, setNumberOfBeings] = useState<string>(w12m.numberOfBeingsW12M);
+	const [twoPlusTwo,setTwoPlusTwo] = useState<string>(w12m.twoPlusTwoW12M);
+	const [reasonSpare,setReasonSpare] = useState<string>(w12m.reasonSpareW12M);
 
 	useEffect(() => {
         setSubmitButton(submitButton);
+
     }, [submitButton])
 	
 	function submitW12Form() {
-		console.log(speciesName);
-		console.log(planetName);
-		console.log(numberOfBeings);
-		console.log(twoPlusTwo);
-		console.log(reasonSpare);	
+		onChangeW12M({speciesNameW12M : speciesName, planetNameW12M : planetName,numberOfBeingsW12M :numberOfBeings,twoPlusTwoW12M:twoPlusTwo,reasonSpareW12M:reasonSpare});
 	}
-
 
 	return (
 		<section className='w12MForm'>
@@ -51,10 +68,23 @@ const W12MForm = () => {
 				<NumberOfBeings numberOfBeings={numberOfBeings} onChangeNumberOfBeings={(e: any) => setNumberOfBeings(e.target.value)} />
 				<WhatIsTwoPlusTwo whatIsTwoPlusTwo={twoPlusTwo} onChangeWhatIsTwoPlusTwo={(e: any) => setTwoPlusTwo(e.target.value)} />
 				<ReasonForSparing reasonForSparing={reasonSpare} onReasonForSparing={(e: any) => setReasonSpare(e.target.value)} />
-				<button className="w12MForm-submit-button" type="submit" onClick={submitW12Form} disabled={submitButton}>Submit</button>
-
+				{/* <button className="w12MForm-submit-button" type="submit" onClick={submitW12Form} disabled={submitButton}>Submit</button> */}
+				<button className="w12MForm-submit-button" type="submit" onClick={submitW12Form} >Submit</button>
 			</UpdateSubmitButtonContext.Provider>
         	</submitButtonContext.Provider>
+
+			<div className="text">
+					<br></br>
+					[speciesName:{w12m.speciesNameW12M}]
+					<br></br>
+					[planetName:{w12m.planetNameW12M}]
+					<br></br>
+					[numberOfBeings:{w12m.numberOfBeingsW12M}]
+					<br></br>
+					[twoPlusTwo:{w12m.twoPlusTwoW12M}]
+					<br></br>
+					[reasonSpare:{w12m.reasonSpareW12M}]
+			</div>
 		</section>
 	);
 };
