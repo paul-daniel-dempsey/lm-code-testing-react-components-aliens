@@ -39,11 +39,7 @@ describe('WhatIsTwoPlusTwo', () => {
         if (inputfield){
             fireEvent.change(inputfield,{target: { value : testField}})
         }
-
-        // Input field onChange called?
         expect(mockOnChangeTwoPlusTwo.mock.calls.length).toBe(1);
-
-        // Input field called with correct parameters?
         expect(mockOnChangeTwoPlusTwo.mock.calls[0][0].target.value).toBe(testField);
     });
    

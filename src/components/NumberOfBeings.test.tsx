@@ -10,9 +10,7 @@ describe('NumberOfBeings', () => {
                     onChangeNumberOfBeings={function (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>): void {
             throw new Error('Function not implemented.');
         } } />);
-        
-        // Why does <input type='text' ...> equate to 'textbox' rather than 'input' or 'inputtext'!
-        // expect(screen.getByRole('textbox')).toBeInTheDocument();
+
         expect(screen.getByTestId('numberOfBeings')).toBeInTheDocument();
     });
 
@@ -39,14 +37,10 @@ describe('NumberOfBeings', () => {
         const inputfield = screen.getByTestId('numberOfBeings');
 
         if (inputfield){
-            userEvent.type(inputfield,testField); // WHY doesnt this set value!!!!
+            userEvent.type(inputfield,testField);
         }
-
-        // Input field onChange called?
-        expect(mockOnChangeNumberOfBeings.mock.calls.length).toBe(testField.length);
-
-        // Input field called with correct parameters?
-        expect(mockOnChangeNumberOfBeings.mock.calls[testField.length-1][0].target.value).toBe('0'); // testField
+        expect(mockOnChangeNumberOfBeings.mock.calls.length).toBe(testField.length)
+        expect(mockOnChangeNumberOfBeings.mock.calls[testField.length-1][0].target.value).toBe('0');
     });
     
     test(`Given VALID 1 props ([%p]),
