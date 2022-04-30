@@ -20,7 +20,6 @@ describe('W12Form', () => {
 		if (buttonSubmit){
             userEvent.click(buttonSubmit);
         }
-        console.log(mockOnChange.mock.calls)
 		expect(mockOnChange).toHaveBeenCalledTimes(1);
 		expect(mockOnChange).toHaveBeenCalledWith(test_W12m);
     });

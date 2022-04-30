@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import W12MHeader from './W12MHeader';
-import SpeciesName from './SpeciesName';
-import PlanetName from './PlanetName';
+import TextInput, { TIType } from './TextInput';
 import NumberOfBeings from './NumberOfBeings';
 import WhatIsTwoPlusTwo from './WhatIsTwoPlusTwo';
-import ReasonForSparing from './ReasonForSparing';
 import React from 'react';
 
 // Create Context
@@ -62,13 +60,11 @@ const W12MForm : React.FC<W12MProps> = ({ w12m , onChangeW12M }) => {
 			
 			<submitButtonContext.Provider value={submitButton}>
         	<UpdateSubmitButtonContext.Provider value={setSubmitButton}>    
-
-				<SpeciesName speciesName={speciesName} onChangeSpeciesName={(e: any) => setSpeciesName(e.target.value)} />
-				<PlanetName planetName={planetName} onChangePlanetName={(e: any) => setPlanetName(e.target.value)} />
+				<TextInput textInput={{type : "SPECIES" as TIType, value : speciesName}} onChangeTextInput={(e: any) => setSpeciesName(e.target.value)} />
+				<TextInput textInput={{type : "PLANET" as TIType, value : planetName}} onChangeTextInput={(e: any) => setPlanetName(e.target.value)} />
 				<NumberOfBeings numberOfBeings={numberOfBeings} onChangeNumberOfBeings={(e: any) => setNumberOfBeings(e.target.value)} />
 				<WhatIsTwoPlusTwo whatIsTwoPlusTwo={twoPlusTwo} onChangeWhatIsTwoPlusTwo={(e: any) => setTwoPlusTwo(e.target.value)} />
-				<ReasonForSparing reasonForSparing={reasonSpare} onReasonForSparing={(e: any) => setReasonSpare(e.target.value)} />
-				{/* <button className="w12MForm-submit-button" type="submit" onClick={submitW12Form} disabled={submitButton}>Submit</button> */}
+				<TextInput textInput={{type : "REASON" as TIType, value : reasonSpare}} onChangeTextInput={(e: any) => setReasonSpare(e.target.value)} />
 				<button className="w12MForm-submit-button" type="submit" onClick={submitW12Form} >Submit</button>
 			</UpdateSubmitButtonContext.Provider>
         	</submitButtonContext.Provider>
