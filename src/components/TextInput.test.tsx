@@ -24,7 +24,7 @@ describe('SpeciesName', () => {
         render(<TextInput {...TIs}/>);
         const inputbox = screen.getByRole('textbox');
         userEvent.type(inputbox,testField);
-		expect(await screen.findByText('ERROR - Species Name must be less than 23 characters')).toBeInTheDocument();
+		expect(await screen.findByText('ERROR - Field must have no special characters, greater than 2 characters, less than 24 characters, have no numbers, have no special characters')).toBeInTheDocument();
     });
 
     test('Does each input field call its onChange function and pass it the correct parameters', () => {
@@ -63,7 +63,7 @@ describe('Planet', () => {
         render(<TextInput {...TIs}/>);
         const inputbox = screen.getByRole('textbox');
         userEvent.type(inputbox,testField);
-		expect(await screen.findByText('ERROR - Must be between 2 and 49 characters. Numbers are allowed, but no special characters')).toBeInTheDocument();
+		expect(await screen.findByText('ERROR - Field must have no special characters, greater than 1 characters, less than 50 characters, have no special characters')).toBeInTheDocument();
     });
 
     test('Does each input field call its onChange function and pass it the correct parameters', () => {
@@ -102,7 +102,7 @@ describe('Reason For Sparing', () => {
         render(<TextInput {...TIs}/>);
         const inputbox = screen.getByRole('textbox');
         userEvent.type(inputbox,testField);
-		expect(await screen.findByText('ERROR - Must be between 17 and 153 characters')).toBeInTheDocument();
+		expect(await screen.findByText('ERROR - Field must have no special characters, greater than 16 characters, less than 154 characters')).toBeInTheDocument();
     });
 
     test('Does each input field call its onChange function and pass it the correct parameters', () => {
