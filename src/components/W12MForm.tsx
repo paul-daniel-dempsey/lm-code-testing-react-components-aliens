@@ -4,6 +4,7 @@ import TextInput, { TIType } from "./TextInput";
 import NumberOfBeings from "./NumberOfBeings";
 import WhatIsTwoPlusTwo from "./WhatIsTwoPlusTwo";
 import React from "react";
+import { W12FormProvider } from "./W12MContext"
 
 // Create Context
 export const W12FormContext = React.createContext<boolean>(true);
@@ -62,7 +63,8 @@ const W12MForm: React.FC<W12MProps> = ({ w12m, onChangeW12M }) => {
   return (
     <section className="w12MForm">
       <W12MHeader />
-
+      
+      {/* <W12FormProvider> */}
       <W12FormContext.Provider value={submitButton}>
         <UpdateW12FormContext.Provider value={setSubmitButton}>
           <TextInput
@@ -96,6 +98,7 @@ const W12MForm: React.FC<W12MProps> = ({ w12m, onChangeW12M }) => {
           </button>
         </UpdateW12FormContext.Provider>
       </W12FormContext.Provider>
+      {/* </W12FormProvider> */}
 
       <div className="text">
         <br></br>
