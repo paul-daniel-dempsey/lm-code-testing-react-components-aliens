@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { validate } from "../shared/validation";
 import ErrorMessage from "./ErrorMessage";
-import { UpdateSubmitButtonContext } from "./W12MForm";
+import { UpdateW12FormContext } from "./W12MForm";
 
 export const TI = ["SPECIES", "PLANET", "REASON"] as const;
 export type TIType = typeof TI[number];
@@ -23,7 +23,7 @@ const TextInput: React.FC<TextInputProps> = ({
   onChangeTextInput,
 }) => {
   // Consume
-  const setSubmitButton = useContext(UpdateSubmitButtonContext);
+  const setSubmitButton = useContext(UpdateW12FormContext);
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
